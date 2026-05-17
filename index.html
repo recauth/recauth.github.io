@@ -1,17 +1,25 @@
-<title>Recauth</title>
-<script src="sha1.min.js"></script>
+<head>
+    <title>Recauth</title>
+    <script src="sha1.min.js"></script>
+    <link rel="icon" href="icon.png">
+</head>
 
 <style>
     * { box-sizing:border-box; }
 
+    /* Desktop */
     @media screen and (min-width: 1000px){
         body { padding-left:25vw; padding-right:25vw; }
         #Desc { order:1; }
         #Form { order:2; }
+        #Logo { width:1.4rem; height:1.4rem; }
     }
+  
+    /* Mobile */
     @media screen and (max-width: 1000px){
         * { font-size:2rem; }
         body { padding-left:2rem; padding-right:2rem; }
+        #Logo { width:2rem; height:2rem; }
         h1 { font-size:3rem; }
         #Desc { order:2; }
         #Form { order:1; }
@@ -20,7 +28,10 @@
     input { width:100%; }
 </style>
 <h1>&nbsp;</h1>
-<h1>Recauth</h1>
+<h1 style="color:blue;">
+    <img id="Logo" src="icon.png"
+    >Recauth
+</h1>
 <div>Recall-based Authentication Demo</div>
 <hr>
 
