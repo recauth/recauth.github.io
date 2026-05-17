@@ -2,7 +2,7 @@
 Recall-based Authentication Demo
 
 # Mobile App
-Builder: Median.co
+Builder: Median.co<br>
 Package: co.median.android.krommed
 
 # Web App
