@@ -1,0 +1,75 @@
+<title>Recauth Demo</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.7.0/sha1.min.js">    
+</script>
+
+<style>
+    * { box-sizing:border-box; }
+    body { padding-left:25vw; padding-right:25vw; }
+    input { width:100%; }
+</style>
+<h1>Recauth</h1>
+<div>Recall-based Authentication Demo</div>
+<hr>
+This is a demo of <u>Recauth</u> (recall-based authentication method) which can be used
+for <u>primary vault</u> (password manager) to be a part of the efforts to make
+password-less authentication.<br><br>
+There are <u>possession, inherence, and memorizing</u> used in infosec, possession can't 
+be used for vault 'cause losing it means losing all. Inherence can be copied or
+used while consciousless (eg. sleeping) and can't be for primary vault too. The only 
+factor is memorizing is possible in this case, but remembering complex password is 
+not favoured modernly. Using recall-based method is a good try to be <u>passwordless</u>.<br><br>
+This idea was used in the <u>early Internet</u> for account recovery. The idea is each user has 
+a <u>sequence of security questions</u> to answer, the vault <u>combine</u> the answers and make 
+a hash password or key. Answers are <u>case-insensitive</u>, and spaces are collapsed, to avoid 
+exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used to avoid answering again.
+<hr>
+<div>&nbsp;</div>
+
+<big>Sample Questions</big>
+<div>What is the shape you think of?</div>
+<input id="Answer1" value="Shape">
+
+<div>What is the sound you think of?</div>
+<input id="Answer2" value="Sound">
+
+<div>
+    <button onclick="compute_vault_key();">Compute Vault Key</button>
+</div>
+<hr>
+<div>&nbsp;</div>
+
+<div>Answers Combined</div>
+<input id="Combined">
+
+<div>Final SHA1 Hash</div>
+<span style="font-size:small;">The final result is hash to be used as 
+    classic PW or deriving key</span>
+<input id="Final-Hash" onclick="this.select();">
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+<i>An effort by Nacait Team</i>
+
+<script>
+    var log = console.log;
+    
+    function d$(Sel){
+        return document.querySelector(Sel);
+    }
+    
+    function compute_vault_key(){
+        var Ans1 = d$("#Answer1").value.trim().toLowerCase()
+            .replace(/[\s]{2,}/g, "\x20");
+        var Ans2 = d$("#Answer2").value.trim().toLowerCase()
+            .replace(/[\s]{2,}/g, "\x20");;
+        log(Ans1,Ans2);
+        var Combined = Ans1 + "\x20" + Ans2;
+        d$("#Combined").value = Combined;
+
+        var Hash = sha1.create();
+        Hash.update(Combined);
+        var Hashstr = Hash.hex().toLowerCase();
+        d$("#Final-Hash").value = Hashstr;
+    }
+</script>
