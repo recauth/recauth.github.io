@@ -65,8 +65,11 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
 <input id="Answer2" value="Sound">
 
 <div>
-    <button onclick="compute_vault_key();">Compute Vault Key</button>
+    <button onclick="compute_vault_key();">Make Vault Key</button>
+    <button onclick="clear_info();">Clear</button>
 </div>
+<a id="Per-Link" target="_blank" href="javascript:"
+    style="display:none;">Your Personal Link</a>
 <hr>
 <div>&nbsp;</div>
 
@@ -110,5 +113,20 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
         Hash.update(Combined);
         var Hashstr = Hash.hex().toLowerCase();
         d$("#Final-Hash").value = Hashstr;
+
+        var Hash2 = sha1.create();
+        Hash2.update(Hashstr);
+        var Hash2str = Hash2.hex().toLowerCase();
+        var Slug = Hash2str.slice(0,30);
+        var Ele = d$("#Per-Link");
+        Ele.setAttribute("href", "https://tinyurl.com/"+Slug);
+        Ele.style.display = "block";
+    }
+
+    function clear_info(){
+        d$("#Answer1").value = "";
+        d$("#Answer2").value = "";
+        d$("#Combined").value = "";
+        d$("#Final-Hash").value = "";
     }
 </script>
