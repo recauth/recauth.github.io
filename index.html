@@ -1,30 +1,48 @@
-<title>Recauth Demo</title>
+<title>Recauth</title>
 <script src="sha1.min.js"></script>
 
 <style>
     * { box-sizing:border-box; }
-    body { padding-left:25vw; padding-right:25vw; }
+
+    @media screen and (min-width: 1000px){
+        body { padding-left:25vw; padding-right:25vw; }
+        #Desc { order:1; }
+        #Form { order:2; }
+    }
+    @media screen and (max-width: 1000px){
+        * { font-size:1.5rem; }
+        body { padding-left:2rem; padding-right:2rem; }
+        h1 { font-size:3rem; }
+        #Desc { order:2; }
+        #Form { order:1; }
+        .note-small { font-size:1rem !important; }
+    }
     input { width:100%; }
 </style>
 <h1>&nbsp;</h1>
 <h1>Recauth</h1>
 <div>Recall-based Authentication Demo</div>
 <hr>
+
+<div style="display:flex; flex-direction:column;">
+<div id="Desc">
 This is a demo of <u>Recauth</u> (recall-based authentication method) which can be used
 for <u>primary vault</u> (password manager) to be a part of the efforts to make
 password-less authentication.<br><br>
-There are <u>possession, inherence, and memorizing</u> used in infosec, possession can't 
+There are <u>possession, inherence, and memorizing</u> used in infosec, possession can't
 be used for vault 'cause losing it means losing all. Inherence can be copied or
-used while consciousless (eg. sleeping) and can't be for primary vault too. The only 
-factor is memorizing is possible in this case, but remembering complex password is 
+used while consciousless (eg. sleeping) and can't be for primary vault too. The only
+factor is memorizing is possible in this case, but remembering complex password is
 not favoured modernly. Using recall-based method is a good try to be <u>passwordless</u>.<br><br>
-This idea was used in the <u>early Internet</u> for account recovery. The idea is each user has 
-a <u>sequence of security questions</u> to answer, the vault <u>combines</u> the answers and make 
-a hash password or key. Answers are <u>case-insensitive</u>, and spaces are collapsed, to avoid 
+This idea was used in the <u>early Internet</u> for account recovery. The idea is each user has
+a <u>sequence of security questions</u> to answer, the vault <u>combines</u> the answers and make
+a hash password or key. Answers are <u>case-insensitive</u>, and spaces are collapsed, to avoid
 exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used to avoid answering again.
 <hr>
 <div>&nbsp;</div>
+</div>
 
+<div id="Form">
 <big>Sample Questions</big>
 <div>Username:</div>
 <input id="Username" value="John">
@@ -45,21 +63,27 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
 <input id="Combined">
 
 <div>Final SHA1 Hash</div>
-<span style="font-size:small;">The final result is hash to be used as 
+<span class="note-small" style="font-size:small;">The final result is hash to be used as
     classic PW or deriving key</span>
 <input id="Final-Hash" onclick="this.select();">
 <div>&nbsp;</div>
-<div>&nbsp;</div>
+</div>
 
+<div style="order:3;">
+<div>&nbsp;</div>
+<div>&nbsp;</div>
 <i>An effort by Nacait Team</i>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+</div>
 
 <script>
     var log = console.log;
-    
+
     function d$(Sel){
         return document.querySelector(Sel);
     }
-    
+
     function compute_vault_key(){
        var User = d$("#Username").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");
