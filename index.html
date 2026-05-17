@@ -107,9 +107,10 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
         var Ans1 = d$("#Answer1").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");
         var Ans2 = d$("#Answer2").value.trim().toLowerCase()
-            .replace(/[\s]{2,}/g, "\x20");;
+            .replace(/[\s]{2,}/g, "\x20");
         log(Ans1,Ans2);
         var Combined = User +"\x20"+ Ans1 + "\x20" + Ans2;
+        Combined = Combined.trim().replace(/[\s]{2,}/g, "\x20");
         d$("#Combined").value = Combined;
 
         var Hash = sha1.create();
