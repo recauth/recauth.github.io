@@ -28,6 +28,9 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
 <div>&nbsp;</div>
 
 <big>Sample Questions</big>
+<div>Username:</div>
+<input id="Username" value="John">
+
 <div>What is the shape you think of?</div>
 <input id="Answer1" value="Shape">
 
@@ -60,12 +63,14 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
     }
     
     function compute_vault_key(){
+       var User = d$("#Username").value.trim().toLowerCase()
+            .replace(/[\s]{2,}/g, "\x20");
         var Ans1 = d$("#Answer1").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");
         var Ans2 = d$("#Answer2").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");;
         log(Ans1,Ans2);
-        var Combined = Ans1 + "\x20" + Ans2;
+        var Combined = User +"\x20"+ Ans1 + "\x20" + Ans2;
         d$("#Combined").value = Combined;
 
         var Hash = sha1.create();
