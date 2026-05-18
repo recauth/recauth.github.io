@@ -125,6 +125,8 @@ exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used
         var Ele = d$("#Per-Link");
         Ele.setAttribute("href", "https://tinyurl.com/"+Slug);
         Ele.style.display = "block";
+
+        setTimeout(clear_info,60*1000);
     }
 
     function clear_info(){
