@@ -7,6 +7,12 @@
 <style>
     * { box-sizing:border-box; }
     input { border-top:0; border-right:0; }
+    body {
+        background:url(bg-page.png);
+        background-size: 100vw auto;  /* Width is 100vw, height scales proportionally */
+        background-repeat: repeat-y;  /* Repeats only downwards */
+        background-position: top center; /* Starts aligning from the top center */
+    }
 
     /* Desktop */
     @media screen and (min-width: 1000px){
@@ -14,6 +20,16 @@
         #Desc { order:1; }
         #Form { order:2; }
         #Logo { width:1.4rem; height:1.4rem; }
+        #Desc { position:relative; }
+        #Desc-Bg { 
+            position:absolute; /*background:skyblue;*/ left:-25vw;
+            width:100vw; height:calc(100% - 2rem); z-index:1;
+            background-image:url(bg-banner.png);
+            background-size:100vw auto;
+        }
+        #Desc-Text {
+            z-index:2; position:relative;
+        }
     }
   
     /* Mobile */
@@ -29,7 +45,7 @@
     input { width:100%; }
 </style>
 <h1>&nbsp;</h1>
-<h1 style="color:blue;">
+<h1 style="color:blue; background:#eee; border-radius:1rem;">
     <!-- <img id="Logo" src="icon.png"> -->
     <!-- Logo seems rendered wrong in Median.co on physical Android
     using the 'thought' emoji instead -->
@@ -41,20 +57,22 @@
 
 <div style="display:flex; flex-direction:column;">
 <div id="Desc">
-This is a demo of <u>Recauth</u> (recall-based authentication method) which can be used
-for <u>primary vault</u> (password manager) to be a part of the efforts to make
-password-less authentication.<br><br>
-There are <u>possession, inherence, and memorizing</u> used in infosec, possession can't
-be used for vault 'cause losing it means losing all. Inherence can be copied or
-used while consciousless (eg. sleeping) and can't be for primary vault too. The only
-factor is memorizing is possible in this case, but remembering complex password is
-not favoured modernly. Using recall-based method is a good try to be <u>passwordless</u>.<br><br>
-This idea was used in the <u>early Internet</u> for account recovery. The idea is each user has
-a <u>sequence of security questions</u> to answer, the vault <u>combines</u> the answers and make
-a hash password or key. Answers are <u>case-insensitive</u>, and spaces are collapsed, to avoid
-exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used to avoid answering again.
-<hr>
-<div>&nbsp;</div>
+    <div id="Desc-Bg">&nbsp;</div>
+    <div id="Desc-Text">
+        This is a demo of <u>Recauth</u> (recall-based authentication method) which can be used
+        for <u>primary vault</u> (password manager) to be a part of the efforts to make
+        password-less authentication.<br><br>
+        There are <u>possession, inherence, and memorizing</u> used in infosec, possession can't
+        be used for vault 'cause losing it means losing all. Inherence can be copied or
+        used while consciousless (eg. sleeping) and can't be for primary vault too. The only
+        factor is memorizing is possible in this case, but remembering complex password is
+        not favoured modernly. Using recall-based method is a good try to be <u>passwordless</u>.<br><br>
+        This idea was used in the <u>early Internet</u> for account recovery. The idea is each user has
+        a <u>sequence of security questions</u> to answer, the vault <u>combines</u> the answers and make
+        a hash password or key. Answers are <u>case-insensitive</u>, and spaces are collapsed, to avoid
+        exact memorizing which is hard in humans. After auth, a <u>short PIN</u> is used to avoid answering again.
+    </div>
+    <hr><div>&nbsp;</div>
 </div>
 
 <div id="Form">
