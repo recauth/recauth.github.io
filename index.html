@@ -34,6 +34,19 @@
             z-index:2; position:relative; padding-top:2rem;
             padding-bottom:2rem; color:white;
         }
+        #Board-Btn {
+            height:calc(100% - 10px); width:40px; background-color:#7D7DC0;
+            border:0; margin-left:5px; margin-top:5px;
+        }
+        #Board-Btn:hover {
+            background-color:skyblue;
+        }
+        #Board-Frame {
+            position:fixed; z-index:3; left:50px; top:120px;
+            display:none; width:calc(100vw - 100px);
+            height:calc(100vh - 240px); overscroll-behavior: contain;
+            border-radius:5px;
+        }
     }
   
     /* Mobile */
@@ -43,6 +56,7 @@
         #Logo { width:2rem; height:2rem; }
         h1 { font-size:3rem; }
         #Desc { order:2; }
+        #Desc-Bg { display:none; }
         #Form { order:1; }
         .note-small { font-size:1rem !important; }
     }
@@ -61,7 +75,9 @@
 
 <div style="display:flex; flex-direction:column;">
 <div id="Desc">
-    <div id="Desc-Bg">&nbsp;</div>
+    <div id="Desc-Bg">
+        <button id="Board-Btn" onclick="toggle_board();">&gt;</button>
+    </div>
     <div id="Desc-Text">
         This is a demo of <u>Recauth</u> (recall-based authentication method) which can be used
         for <u>primary vault</u> (password manager) to be a part of the efforts to make
@@ -119,11 +135,28 @@
 <div>&nbsp;</div>
 </div>
 
+<iframe id="Board-Frame" src="https://start.me"></iframe>
+  
 <script>
     var log = console.log;
 
     function d$(Sel){
         return document.querySelector(Sel);
+    }
+  
+    function toggle_board(){
+        var Ele = d$("#Board-Frame");
+        
+        if (Ele.style.display == "block"){
+            d$("body").scrollBy(0,-Number.MAX_SAFE_INTEGER);
+            d$("body").style.overflow = "auto";
+            Ele.style.display = "none";          
+        }
+        else{
+            d$("body").scrollBy(0,-Number.MAX_SAFE_INTEGER);
+            d$("body").style.overflow = "hidden";
+            Ele.style.display = "block";
+        }
     }
 
     function compute_vault_key(){
