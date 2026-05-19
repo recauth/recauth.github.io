@@ -94,8 +94,12 @@
     <button onclick="compute_vault_key();">Make Vault Key</button>
     <button onclick="clear_info();">Clear</button>
 </div>
-<a id="Per-Link" target="_blank" href="javascript:"
-    style="display:none;">Your Personal Link</a>
+<div id="Link-Box" style="display:none;">    
+    <a id="Per-Link1" target="_blank" href="javascript:"
+        style="display:none;">Link 1</a> •
+    <a id="Per-Link2" target="_blank" href="javascript:"
+        style="display:none;">Link 2</a>
+</div>
 <hr>
 <div>&nbsp;</div>
 
@@ -136,19 +140,29 @@
         Combined = Combined.trim().replace(/[\s]{2,}/g, "\x20");
         d$("#Combined").value = Combined;
 
+        // vault pw
         var Hash = sha1.create();
         Hash.update(Combined);
         var Hashstr = Hash.hex().toLowerCase();
         d$("#Final-Hash").value = Hashstr;
 
+        // link 1
         var Hash2 = sha1.create();
         Hash2.update(Hashstr);
         var Hash2str = Hash2.hex().toLowerCase();
         var Slug = Hash2str.slice(0,30);
-        var Ele = d$("#Per-Link");
+        var Ele = d$("#Per-Link1");
         Ele.setAttribute("href", "https://tinyurl.com/"+Slug);
-        Ele.style.display = "block";
 
+        // link 2
+        var Hash3 = sha1.create();
+        Hash3.update(Hash2str);
+        var Hash3str = Hash3.hex().toLowerCase();
+        var Slug = Hash3str.slice(0,30);
+        var Ele = d$("#Per-Link2");
+        Ele.setAttribute("href", "https://tinyurl.com/"+Slug);
+        
+        d$("#Link-Box").style.display = "block";
         setTimeout(clear_info,60*1000);
     }
 
