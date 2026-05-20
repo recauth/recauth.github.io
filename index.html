@@ -161,7 +161,9 @@
     }
 
     function compute_vault_key(){
-       var User = d$("#Username").value.trim().toLowerCase()
+        const SLUG_LEN = 25; // tiny.cc
+        
+        var User = d$("#Username").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");
         var Ans1 = d$("#Answer1").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");
@@ -182,17 +184,17 @@
         var Hash2 = sha1.create();
         Hash2.update(Hashstr);
         var Hash2str = Hash2.hex().toLowerCase();
-        var Slug = Hash2str.slice(0,30);
+        var Slug = Hash2str.slice(0,SLUG_LEN);
         var Ele = d$("#Per-Link1");
-        Ele.setAttribute("href", "https://tinyurl.com/"+Slug);
+        Ele.setAttribute("href", "http://tiny.cc/"+Slug);
 
         // link 2
         var Hash3 = sha1.create();
         Hash3.update(Hash2str);
         var Hash3str = Hash3.hex().toLowerCase();
-        var Slug = Hash3str.slice(0,30);
+        var Slug = Hash3str.slice(0,SLUG_LEN);
         var Ele = d$("#Per-Link2");
-        Ele.setAttribute("href", "https://tinyurl.com/"+Slug);
+        Ele.setAttribute("href", "http://tiny.cc/"+Slug);
         
         d$("#Link-Box").style.display = "block";
         setTimeout(clear_info,60*1000);
