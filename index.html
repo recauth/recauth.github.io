@@ -176,7 +176,7 @@
             .replace(/[\s]{2,}/g, "\x20");
         var Ans2 = d$("#Answer2").value.trim().toLowerCase()
             .replace(/[\s]{2,}/g, "\x20");
-        log(Ans1,Ans2);
+        
         var Combined = User +"\x20"+ Ans1 + "\x20" + Ans2;
         Combined = Combined.trim().replace(/[\s]{2,}/g, "\x20");
         d$("#Combined").value = Combined;
