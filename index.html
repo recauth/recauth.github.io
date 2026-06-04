@@ -2,6 +2,7 @@
     <title>Recauth</title>
     <script src="sha1.min.js"></script>
     <link rel="icon" href="icon.png">
+    <script src="https://embedai.dev/embed/v1/chat.js"></script>
 </head>
 
 <style>
@@ -61,6 +62,7 @@
         #Form { order:1; }
         .note-small { font-size:1rem !important; }
         #Board-Frame { display:none; }
+        embedai-chat { display:none !important; }
     }
     input { width:100%; }
 </style>
@@ -72,7 +74,7 @@
     <a target="_self" href="/" style="text-decoration:none;">💭</a
     ><a target="_self" href="/">Recauth</a>
 </h1>
-<div>Recall-based Authentication Demo</div>
+<div>Recall-based Authentication Demo<br>Auth for MetaOS</div>
 <hr>
 
 <div style="display:flex; flex-direction:column;">
@@ -145,8 +147,14 @@
 <script>
     var log = console.log;
 
+    // Select element
     function d$(Sel){
         return document.querySelector(Sel);
+    }
+
+    // Select multiple elements
+    function d$$(Sel){
+        return [...document.querySelectorAll(Sel)];
     }
   
     function toggle_board(){
@@ -213,4 +221,26 @@
         d$("#Combined").value = "";
         d$("#Final-Hash").value = "";
     }
+
+    // Update EmbedAI ui and others
+    function update_ui(){
+        var Eles = d$$("embedai-chat");
+
+        for (let E of Eles){
+            let Bub = E.shadowRoot.querySelector(#bubble");
+            Bub.position = "fixed";
+            Bub.right = "25vw";
+
+            let Panel = E.shadowRoot.querySelector(#panel");
+            Panel.position = "fixed";
+            Panel.right = "25vw";
+
+            if (Bub.getAttribute("clicked") != "true"){
+                Bub.click();
+                Bub.setAttribute("clicked","true");
+            }
+        } // All embedai
+    }
+    
+    setInterval(update_ui,1000);
 </script>
