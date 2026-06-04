@@ -169,14 +169,14 @@
             d$("body").style.overflow = "auto";
             Back.style.display = "none";
             Ele.style.display = "none";
-            d$("embedai-chat").style.display = "none";
+            d$("embedai-chat").style.display = "";
         }
         else{
             d$("body").scrollBy(0,-Number.MAX_SAFE_INTEGER);
             d$("body").style.overflow = "hidden";
             Back.style.display = "block";
             Ele.style.display = "block";
-            d$("embedai-chat").style.display = "";
+            d$("embedai-chat").style.display = "none";
         }
     }
 
