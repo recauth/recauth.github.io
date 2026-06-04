@@ -2,7 +2,7 @@
     <title>Recauth</title>
     <script src="sha1.min.js"></script>
     <link rel="icon" href="icon.png">
-    <script src="https://embedai.dev/embed/v1/chat.js"></script>
+    <script src="https://embedai.dev/embed/v1/chat.js" accent="#7d7dc0"></script>
 </head>
 
 <style>
@@ -74,7 +74,7 @@
     <a target="_self" href="/" style="text-decoration:none;">💭</a
     ><a target="_self" href="/">Recauth</a>
 </h1>
-<div>Recall-based Authentication Demo<br>Auth for MetaOS</div>
+<div><b>Auth for MetaOS</b>: Recall-based Authentication Demo</div>
 <hr>
 
 <div style="display:flex; flex-direction:column;">
@@ -228,12 +228,13 @@
 
         for (let E of Eles){
             let Bub = E.shadowRoot.querySelector("#bubble");
-            Bub.position = "fixed";
-            Bub.right = "25vw";
+            Bub.style.position = "fixed";
+            Bub.style.right = "25vw";
+            Bub.style.opacity = ".5";
 
             let Panel = E.shadowRoot.querySelector("#panel");
-            Panel.position = "fixed";
-            Panel.right = "25vw";
+            Panel.style.position = "fixed";
+            Panel.style.right = "25vw";
 
             if (Bub.getAttribute("clicked") != "true"){
                 Bub.click();
