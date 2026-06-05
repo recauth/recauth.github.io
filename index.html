@@ -2,8 +2,6 @@
     <title>Recauth</title>
     <script src="sha1.min.js"></script>
     <link rel="icon" href="icon.png">
-    <script src="https://embedai.dev/embed/v1/chat.js" accent="#eee"
-        text="#000000"></script>
 </head>
 
 <style>
@@ -65,7 +63,7 @@
         #Form { order:1; }
         .note-small { font-size:1rem !important; }
         #Board-Frame { display:none; }
-        embedai-chat { display:none !important; }
+        #Ai-Box { display:none !important; }
     }
     input { width:100%; }
 </style>
@@ -142,6 +140,28 @@
 <div>&nbsp;</div>
 </div>
 
+<div id="Ai-Box" style="position:fixed; bottom:0px; right:25vw; width:25vw; height:50vh;
+        z-index:999;">
+    <div class="panel" style="border:1px solid silver;
+      height:calc(50vh - 50px); border-radius:1rem; background:white;
+      padding:10px;">
+      <div style="height:calc(50vh - 120px);">
+          <b>AI</b>: Hi, I'm local-only AI to help you understand 
+          the authentication process.</div>
+      <div style="height:50px;">
+        <input id="Ai-Input" onclick="this.value='';" onkeyup="send_msg(event);"
+            placeholder="Type message here..."
+            style="height:50px; background:#eee; border-radius:10px;">
+      </div>
+    </div>
+    <div class="bubble" style="text-align:right; height:50px;">
+        <button onclick="toggle_chat();"
+        style="width:50px; height:50px; font-size:xx-large;
+        border-radius:25px; border:1px solid silver;
+        position:fixed; right:25vw; bottom:0;">×</button>
+    </div>
+</div>
+    
 <div id="Backdrop" onclick="toggle_board();"
     style="display:none; z-index: 3; position: fixed; left: 0; top: 0; width: 100vw; 
     height: 100vh; background: rgba(0,0,0,.5);"></div>
@@ -169,14 +189,14 @@
             d$("body").style.overflow = "auto";
             Back.style.display = "none";
             Ele.style.display = "none";
-            d$("embedai-chat").style.display = "";
+            d$("#Ai-Box").style.display = "block";
         }
         else{
             d$("body").scrollBy(0,-Number.MAX_SAFE_INTEGER);
             d$("body").style.overflow = "hidden";
             Back.style.display = "block";
             Ele.style.display = "block";
-            d$("embedai-chat").style.display = "none";
+            d$("#Ai-Box").style.display = "none";
         }
     }
 
@@ -226,27 +246,20 @@
         d$("#Combined").value = "";
         d$("#Final-Hash").value = "";
     }
-
-    // Update EmbedAI ui and others
-    function update_ui(){
-        var Eles = d$$("embedai-chat");
-
-        for (let E of Eles){
-            let Bub = E.shadowRoot.querySelector("#bubble");
-            Bub.style.position = "fixed";
-            Bub.style.right = "25vw";
-            Bub.style.opacity = "1";
-
-            let Panel = E.shadowRoot.querySelector("#panel");
-            Panel.style.position = "fixed";
-            Panel.style.right = "25vw";
-
-            if (Bub.getAttribute("clicked") != "true"){
-                Bub.click();
-                Bub.setAttribute("clicked","true");
-            }
-        } // All embedai
+  
+    function send_msg(Ev){
+        if (Ev.key != "Enter") return;
+        window.alert("That's a dummy AI for now");
+        d$("#Ai-Input").value = "";
     }
-    
-    setInterval(update_ui,1000);
+  
+    function toggle_chat(){
+        var Ele = d$("#Ai-Box .panel");
+        var Dis = Ele.style.display;
+      
+        if (Dis=="" || Dis=="block")
+            Ele.style.display = "none";
+        else
+            Ele.style.display = "block";
+    }
 </script>
