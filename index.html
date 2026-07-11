@@ -202,6 +202,14 @@
             Ele.style.display = "block";
             d$("#Ai-Box").style.display = "none";
         }
+        // Bigger size for small display
+        // when Windows usually scale to devicePixelRatio = 1.25
+        if (window.devicePixelRatio > 1){
+            Ele.style.width = "100vw";
+            Ele.style.left = "0px";
+            Ele.style.height = "calc(100vh - 100px)";
+            Ele.style.top = "50px";
+        }
     }
 
     function compute_vault_key(){
