@@ -73,9 +73,9 @@
     <!-- Logo seems rendered wrong in Median.co on physical Android
     using the 'thought' emoji instead -->
     <a target="_self" href="/" style="text-decoration:none;">💭</a
-    ><a target="_self" href="/">Recauth</a>
+    ><a id="page-title" target="_self" href="/">Recauth</a>
 </h1>
-<div><b>Auth for MetaOS</b>: Recall-based Authentication Demo</div>
+<div id="page-subtitle"><b>Auth for MetaOS</b>: Recall-based Authentication Demo</div>
 <hr>
 
 <div style="display:flex; flex-direction:column;">
@@ -274,4 +274,17 @@
         else
             Ele.style.display = "block";
     }
+
+    window.addEventListener("load",()=>{
+        var url = new URL(location.href);
+        var forDomain = url.searchParams.get("for");
+        if (forDomain==null) return;
+        forDomain = forDomain.trim();
+
+        // Recauth as service for
+        document.title = `${forDomain} - Recauth & Webboard`;
+        d$("#page-title").innerHTML = `${forDomain}`;
+        d$("#page-subtitle").innerHTML = 
+            `<b>Recauth (recall-based auth) & Webboard for ${forDomain}</b>`;
+    });
 </script>
