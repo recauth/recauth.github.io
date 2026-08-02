@@ -169,7 +169,7 @@
 <div id="Backdrop" onclick="toggle_board();"
     style="display:none; z-index: 3; position: fixed; left: 0; top: 0; width: 100vw; 
     height: 100vh; background: rgba(0,0,0,.5);"></div>
-<iframe id="Board-Frame" src="https://start.me"></iframe>
+<iframe id="Board-Frame" src="https://example.com"></iframe>
   
 <script>
     var log = console.log;
@@ -247,6 +247,14 @@
         var Slug = Hash3str.slice(0,SLUG_LEN);
         var Ele = d$("#Per-Link2");
         Ele.setAttribute("href", "https://tiny.cc/"+Slug);
+
+        // board link
+        var Hash4 = sha1.create();
+        Hash4.update(Hash3str);
+        var Hash4str = Hash4.hex().toLowerCase();
+        var Slug = Hash4str.slice(0,SLUG_LEN);
+        var Ele = d$("#Board-Frame");
+        Ele.setAttribute("src","https://tiny.cc/"+Slug);
         
         d$("#Link-Box").style.display = "block";
         setTimeout(clear_info,60*1000);
