@@ -201,6 +201,12 @@
             Back.style.display = "block";
             Ele.style.display = "block";
             d$("#Ai-Box").style.display = "none";
+
+            // Load iframe
+            let board = prompt("Board to load:");
+
+            if (board!=null && board.trim().length>0)
+                Ele.setAttribute("src","https://"+board.toLowerCase());
         }
         // Bigger size for small display
         // when Windows usually scale to devicePixelRatio = 1.25
@@ -247,14 +253,6 @@
         var Slug = Hash3str.slice(0,SLUG_LEN);
         var Ele = d$("#Per-Link2");
         Ele.setAttribute("href", "https://tiny.cc/"+Slug);
-
-        // board link
-        var Hash4 = sha1.create();
-        Hash4.update(Hash3str);
-        var Hash4str = Hash4.hex().toLowerCase();
-        var Slug = Hash4str.slice(0,SLUG_LEN);
-        var Ele = d$("#Board-Frame");
-        Ele.setAttribute("src","https://bit.ly/"+Slug);
         
         d$("#Link-Box").style.display = "block";
         setTimeout(clear_info,60*1000);
